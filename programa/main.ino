@@ -16,6 +16,8 @@ int blinkT = 500;           //Temporizador de parpadeo
 int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
+int giroT=0;                 //Tiempo de giro en maniobras
+int giro180;                 //Tiempo para girar 180º
 
 //BOTÓN
 int pinBut = 10;            //Pin
@@ -121,15 +123,21 @@ void combat(){
 }
 // COMBATE MICRO
 void giroDerecha(){
-  
+  DA;
+  ID;
+  delay(giroT);
 }
 
 void giroIzquierda(){
-
+  DD;
+  IA;
+  delay(giroT);
 }
 
 void giro180(){
-
+  DD;
+  IA;
+  delay(giro180);
 }
 
 void adelante(){
