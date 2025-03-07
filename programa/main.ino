@@ -41,8 +41,10 @@ int pinSDU = 6;                 // PIN Sensor Derecho Ultrasonido
 int pinSDL = 7;                 // PIN Sensor Derecho Laser
 
 //SETUP DE VARIABLES DE ACTUADORES
-int pinMOI = 8;                 // Motor Output Izquierdo
-int pinMOD = 9;                 // Motor Output Derecha
+int pinMOIA = 8;                 // Motor Output Izquierdo A
+int pinMOIB = 9;                 // Motor Output Izquierdo B
+int pinMODA = 10;                // Motor Output Derecha A
+int pinMODB = 12;                // Motor Output Derecha B
 
 Servo Izquierda;                // Define un servo llamado Izquierda
 Servo Derecha;                  // Define un servo llamado Derecha
@@ -116,6 +118,7 @@ void combat(){
   
 }
 
+}
 // COMBATE MICRO
 void giroDerecha(){
   
@@ -151,3 +154,29 @@ void blink_rave(){                //PARPADEO RAPIDO
   digitalWrite(pinLed,LOW);         //Apaga led
   delay(raveT);                     //Espera
 }
+//SENTIDO DE GIRO RUEDAS
+  
+void DD(){                  //Rueda Derecha Delante
+  digitalWrite(pinMODA,LOW);
+  digitalWrite(pinMODB,HIGH);
+}
+void DA(){                  //Rueda Derecha Atras
+  digitalWrite(pinMODB,LOW);
+  digitalWrite(pinMODA,HIGH);
+}
+void ID(){                  //Rueda Izquierda Delante
+  digitalWrite(pinMOIA,LOW);
+  digitalWrite(pinMOIB,HIGH);
+}
+void IA(){                  //Rueda Izquierda Atras
+  digitalWrite(pinMOIB,LOW);
+  digitalWrite(pinMOIA,HIGH);
+}
+void DS(){                  //Rueda Derecha Stop
+  digitalWrite(pinMODB,LOW);
+  digitalWrite(pinMODA,LOW);
+}
+void IS(){                  //Rueda Izquierda Stop
+  digitalWrite(pinMOIB,LOW);
+  digitalWrite(pinMOIA,LOW);
+
