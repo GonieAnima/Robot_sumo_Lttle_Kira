@@ -187,4 +187,5 @@ void DS(){                  //Rueda Derecha Stop
 void IS(){                  //Rueda Izquierda Stop
   digitalWrite(pinMOIB,LOW);
   digitalWrite(pinMOIA,LOW);
+}
 
