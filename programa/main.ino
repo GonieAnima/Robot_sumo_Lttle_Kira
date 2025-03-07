@@ -74,7 +74,7 @@ void loop(){
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
 
-//SEQUENCIA DE INICIO 
+//SECUENCIA DE INICIO 
 void startup(){                     
   while(butState==0){                 //Mientras el boton no esté pulsado
     blink();                            //Función de parpadeo lento
