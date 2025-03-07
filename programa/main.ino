@@ -35,12 +35,9 @@ int ultraTime_I;
 int ultraTime_D;
 
 //PINS DE SENSORES
-int pinSFU = 11;                // PIN Sensor Frontal Ultrasonido
-int pinSFL = 3;                 // PIN Sensor Frontal Laser
-int pinSIU = 4;                 // PIN Sensor Izquierdo Ultrasonido 
-int pinSIL = 5;                 // PIN Sensor Izquierdo Laser
-int pinSDU = 6;                 // PIN Sensor Derecho Ultrasonido
-int pinSDL = 7;                 // PIN Sensor Derecho Laser
+int pinSD = 11;                // PIN Sensor Derecho
+int pinSI = 3;                 // PIN Sensor Izquierdo
+
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 8;                 // Motor Output Izquierdo A
@@ -190,3 +187,8 @@ void IS(){                  //Rueda Izquierda Stop
   digitalWrite(pinMOIA,LOW);
 }
 
+//Lectura de sensores
+void sensor(){
+digitalRead(pinSD);
+digitalRead(pinSI);
+}
