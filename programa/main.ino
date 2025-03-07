@@ -141,7 +141,8 @@ void giro180(){
 }
 
 void adelante(){
-
+  DD;
+  ID;
 }       
 
 void busca(){
