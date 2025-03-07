@@ -122,28 +122,44 @@ void combat(){
 void giroDerecha(){
   DA;
   ID;
-  delay(giroT);
+  for (int X=0,X <= giroT,X=X+1){
+    digitalRead(pinSD);
+    digitalRead(pinSI);
+    delay(1);
+    }
 }
 
-void giroIzquierda(){
+void giroIzquierda(){         // for(X=0,X<=)
   DD;
   IA;
-  delay(giroT);
+  for (int X=0,X <= giroT,X=X+1){
+    digitalRead(pinSD);
+    digitalRead(pinSI);
+    delay(1);
+    }
 }
 
 void giro180(){
   DD;
   IA;
-  delay(giro180);
+  for (int X=0,X <= giro180,X=X+1){
+    digitalRead(pinSD);
+    digitalRead(pinSI);
+    delay(1);
+    }
 }
 
 void adelante(){
   DD;
   ID;
+  while (True){
+    digitalRead(pinSD);
+    digitalRead(pinSI);
+  }
 }       
 
 void busca(){
-
+  
 }
 
 // FUNCIONES DEL LED 
