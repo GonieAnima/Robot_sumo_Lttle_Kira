@@ -74,6 +74,7 @@ void setup(){
 
 // LOOP PRINCIPAL DEL PROGRAMA
 void loop(){
+  startuo();
   testMotor();
 }
 
