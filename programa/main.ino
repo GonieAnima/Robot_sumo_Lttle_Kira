@@ -23,16 +23,22 @@ int giro180;                 //Tiempo para girar 180º
 int pinBut = 10;            //Pin
 int butState = 0;           //Estado del botón
 
+//Lectura de sensores
+void sensor(){
+int SD=digitalRead(pinSD);
+int SI=digitalRead(pinSI);
+}
+
 //INDICADORES
 int pinLed = 13;
 
 //INTERRUPT     (COMUNICACIÓN CON EL SEGUNDO)
 int interruptPin=2;
 
-//DETECCIÓN DE SENSORES
-int ultraTime_F;
-int ultraTime_I;
-int ultraTime_D;
+//Detección de sensores
+int SD=digitalRead(pinSD);
+int SI=digitalRead(pinSI);
+int Detector=0    //Placeholder, cuando sepamos la salida de los sensores lo cambiamos
 
 //PINS DE SENSORES
 int pinSD = 11;                // PIN Sensor Derecho
@@ -44,9 +50,6 @@ int pinMOIA = 8;                 // Motor Output Izquierdo A
 int pinMOIB = 9;                 // Motor Output Izquierdo B
 int pinMODA = 10;                // Motor Output Derecha A
 int pinMODB = 12;                // Motor Output Derecha B
-
-Servo Izquierda;                // Define un servo llamado Izquierda
-Servo Derecha;                  // Define un servo llamado Derecha
 
 //SETUP
 void setup(){
@@ -65,7 +68,7 @@ void setup(){
   //SETUP DE ENTRADAS Y SALIDAS PARA ENCENDIDO
   pinMode(pinBut,INPUT);
   pinMode(pinLed,OUTPUT);
-  //startup();             // DESMARCADO PARA PRUEBAS (TEMPORAL)
+  startup();             // DESMARCADO PARA PRUEBAS (TEMPORAL)
 }
 
 // LOOP PRINCIPAL DEL PROGRAMA
@@ -90,19 +93,11 @@ void startup(){
   combat();                           //MODO DE COMBATE
 }
 
-// TEST DE VELOCIDAD DEL MOTOR
-void testMotor(){                //TEST DE EL MOTOR CON ORDENADOR (PUEDE O NO SER ELIMINADO MAS TARDE)
-  dump=Serial.parseInt();           //Set de preguntas para el usuario
-  while(Serial.available()==0){     //Mientras el monitor serial no recibe nada
-    val=Serial.parseInt();          //Busca un numero entero
-  }
-  Serial.println(val);              //Imprime el valor recibido para confirmar
-  Izquierda.write(val);             //Usa el valor en el motor
-}
 
 //INTERRUPCIONES DE COMUNICACIÓN    (FUNCIÓN HA DE SER OPTIMIZADA AL MILIMETRO)
   //Optimizada
 void interruptInstance(){
+  giro180();
 
 }
 
@@ -114,51 +109,59 @@ void interruptInstance(){
 //COMBATE
 
 void combat(){
+  adelante();
   
 }
 
 }
 // COMBATE MICRO
-void giroDerecha(){
-  DA;
-  ID;
-  for (int X=0,X <= giroT,X=X+1){
-    digitalRead(pinSD);
-    digitalRead(pinSI);
-    delay(1);
-    }
+void giroDerecha(){    //Programa par girar derecha
+  DA();
+  ID();
+  delay(giroT);
+  adelante();
 }
 
 void giroIzquierda(){         // for(X=0,X<=)
-  DD;
-  IA;
-  for (int X=0,X <= giroT,X=X+1){
-    digitalRead(pinSD);
-    digitalRead(pinSI);
-    delay(1);
-    }
+  DD();
+  IA();
+  delay(giroT);
+  adelante();
 }
 
-void giro180(){
-  DD;
-  IA;
-  for (int X=0,X <= giro180,X=X+1){
-    digitalRead(pinSD);
-    digitalRead(pinSI);
+void giro180(){                    //Programa para girar 180 grados
+  DD();                            //Solo se activa por detección de línea
+  IA();
+  for (int X=0,X <= giro180,X=X+1){          //Mientras gira detecta para actuar acorde
+    sensor();
     delay(1);
+    if(SI == Detector){
+      giroIzquierda();
+   }
+    else(SD== Detector){
+      giroDerecha();
     }
 }
+  
 
-void adelante(){
-  DD;
-  ID;
-  while (True){
-    digitalRead(pinSD);
-    digitalRead(pinSI);
+
+void adelante(){                       //Movimiento hacia adelante
+  DD();
+  ID();
+  while (True){                        //Siempre que vaya hacia adelante detecta para actuar acorde
+    sensor();
+    if(SI == Detector){
+      giroIzquierda();
+    }
+    else(SD== Detector){
+      giroDerecha();
+    }
   }
 }       
 
-void busca(){
+void stop(){   //Las dos ruedas paran
+  IS();
+  DS();
   
 }
 
@@ -203,8 +206,3 @@ void IS(){                  //Rueda Izquierda Stop
   digitalWrite(pinMOIA,LOW);
 }
 
-//Lectura de sensores
-void sensor(){
-digitalRead(pinSD);
-digitalRead(pinSI);
-}
