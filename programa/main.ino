@@ -60,11 +60,12 @@ void setup(){
   Serial.begin(115200);                 //Comenzar una conexión serial con el USB
 
   //SETUP DE SALIDAS Y ACTUADORES
-  Izquierda.attach(pinMOI);             // Engancha Izquierda a pinMOI
-  Derecha.attach(pinMOD);               // Engancha Derecha a pinMOD
-  Izquierda.writeMicroseconds(1500); // send "stop" signal to ESC. Also necessary to arm the ESC.
-  Derecha.writeMicroseconds(1500); // send "stop" signal to ESC. Also necessary to arm the ESC.
-
+  pinMode(pinMOIA, OUTPUT);  // Configura los pines como salidas
+  pinMode(pinMOIB, OUTPUT);  
+  pinMode(pinMODA, OUTPUT); 
+  pinMode(pinMODB, OUTPUT); 
+  pinMode(pinSD, INPUT);     //configura los pines como entradas
+  pinMode(pinSI, INPUT); 
   //SETUP DE ENTRADAS Y SALIDAS PARA ENCENDIDO
   pinMode(pinBut,INPUT);
   pinMode(pinLed,OUTPUT);
@@ -132,7 +133,7 @@ void giroIzquierda(){         // for(X=0,X<=)
 void giro180(){                    //Programa para girar 180 grados
   DD();                            //Solo se activa por detección de línea
   IA();
-  for (int X=0,X <= giro180,X=X+1){          //Mientras gira detecta para actuar acorde
+  for (int X=0,X <= giro180,X=X+1){                                          //Mientras gira detecta para actuar acorde
     sensor();
     delay(1);
     if(SI == Detector){
@@ -141,6 +142,7 @@ void giro180(){                    //Programa para girar 180 grados
     else(SD== Detector){
       giroDerecha();
     }
+  }
 }
   
 
