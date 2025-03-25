@@ -17,6 +17,10 @@ void setup(){
   pinMode(TriggerI,OUTPUT);
   pinMode(EchoI,INPUT);
 }
+
+void loop(){
+  sensores();
+}
 //Creamos el loop de detección
 void sensores(){
   digitalWrite(TriggerD,HIGH);
@@ -34,6 +38,10 @@ void sensores(){
   tD=pulseIn(EchoD,HIGH);    //Estas dos lineas se pueden combinar
 
   distanciaD =tD/58;
-  distanciaI =tI/58
+  distanciaI =tI/58;
+
+  serial.println("distancia derecha"+string(distanciaD)+"cm");
+  serial.println("distancia izquierda"+string(distanciaI)+"cm");
+}
   
-//
+
