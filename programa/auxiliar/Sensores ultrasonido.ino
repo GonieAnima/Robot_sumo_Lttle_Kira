@@ -23,22 +23,23 @@ void loop(){
 }
 //Creamos el loop de detección
 void sensores(){
-  digitalWrite(TriggerD,HIGH);
-  delay(2);                           //Hace falta reisar los tiempos y su efectoe en el 
-  digitalWrite(TriggerD,LOW);         //    combate
-  delay(10);
-  digitalWrite(TriggerD,HIGH);
-  digitalWrite(TriggerI,HIGH);
+  digitalWrite(TriggerD,LOW);
   delay(2);
-  digitalWrite(TriggerI,LOW);
+  digitalWrite(TriggerD,HIGH);
   delay(10);
+  digitalWrite(TriggerD,LOW);
+  tD=pulseIn(EchoD,HIGH);  
+ 
+  digitalWrite(TriggerI,LOW);
+  delay(2);
   digitalWrite(TriggerI,HIGH);
-
+  delay(10);
+  digitalWrite(TriggerI,LOW);
   tI=pulseIn(EchoI,HIGH);
-  tD=pulseIn(EchoD,HIGH);    //Estas dos lineas se pueden combinar
+  //Estas dos lineas se pueden combinar
 
-  distanciaD =tD/58;
-  distanciaI =tI/58;
+  distanciaD = (tD*.0343)/2;  
+  distanciaI = (tI*.0343)/2;  
 
   serial.println("distancia derecha"+string(distanciaD)+"cm");
   serial.println("distancia izquierda"+string(distanciaI)+"cm");
