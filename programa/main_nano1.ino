@@ -12,8 +12,8 @@ int giro180t;               //Tiempo para girar 180º
 //INDICADORES
 int pinLed = 13;
 
-//INTERRUPT     (COMUNICACIÓN CON EL SEGUNDO)
-int interruptPin=2;           //Pin de interrupción
+//INTERRUPT                          (COMUNICACIÓN CON EL SEGUNDO)
+int interruptPin=2;                  //Pin de interrupción
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 8;                 // Motor Output Izquierdo A
