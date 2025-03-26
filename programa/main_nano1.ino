@@ -11,7 +11,7 @@ int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                 //Tiempo de giro en maniobras
-int giro180;                 //Tiempo para girar 180º
+int giro180t;                 //Tiempo para girar 180º
 
 //BOTÓN
 int pinBut = 10;            //Pin
@@ -57,7 +57,7 @@ void loop(){
 
 //INTERRUPCIONES DE COMUNICACIÓN    
 void interruptInstance(){
-  //QUE HACES CUANDO SE INTERRUMPE (PENDIENTE DE DEFINIR)
+  giro180();
 }
 
 //COMBATE
@@ -74,7 +74,7 @@ void giroDerecha(){DA();ID();delay(giroT);}               //Giro Derecha
 
 void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
-void giro180(){DD();IA();delay(giro180);}                 //Giro 180º
+void giro180(){DD();IA();delay(giro180t);}                 //Giro 180º
 
 //SENTIDO DE GIRO RUEDAS
   
