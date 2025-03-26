@@ -69,119 +69,35 @@ void setup(){
   //SETUP DE ENTRADAS Y SALIDAS PARA ENCENDIDO
   pinMode(pinBut,INPUT);
   pinMode(pinLed,OUTPUT);
-  startup();             // DESMARCADO PARA PRUEBAS (TEMPORAL)
+  delay(3000)             //Delay normativo de inicio
 }
 
-// LOOP PRINCIPAL DEL PROGRAMA
 void loop(){
-  startuo();
-  testMotor();
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
 
-//SECUENCIA DE INICIO 
-void startup(){                     
-  while(butState==0){                 //Mientras el boton no esté pulsado
-    blink();                            //Función de parpadeo lento
-    butState=digitalRead(pinBut);       //Revisa el boton por si ha cambiado
-  }
-  delay(debounceT);                     //Delay de debouncer 
-  while(butState==1){                 //Mientras el botón esté pulsado
-    blink_rave();                       //Led rave whoooo!
-    butState=digitalRead(pinBut);       //Revisa el boton por si ha cambiado
-  }
-  delay(startT);                      //Delay de inicio
-  combat();                           //MODO DE COMBATE
-}
-
-
-//INTERRUPCIONES DE COMUNICACIÓN    (FUNCIÓN HA DE SER OPTIMIZADA AL MILIMETRO)
-  //Optimizada
+//INTERRUPCIONES DE COMUNICACIÓN    
 void interruptInstance(){
-  giro180();
-
+  //QUE HACES CUANDO SE INTERRUMPE (PENDIENTE DE DEFINIR)
 }
-
-  //No optimizada
-//void interruptInstance(){
-//  Serial.println("Interrupt!")
-//}
 
 //COMBATE
-
 void combat(){
-  adelante();
   
 }
 
-}
 // COMBATE MICRO
-void giroDerecha(){    //Programa par girar derecha
-  DA();
-  ID();
-  delay(giroT);
-  adelante();
-}
+void adelante(){DD();ID();}                               //Adelante
 
-void giroIzquierda(){         // for(X=0,X<=)
-  DD();
-  IA();
-  delay(giroT);
-  adelante();
-}
+void paro(){IS();DS();}                                   //paro
 
-void giro180(){                    //Programa para girar 180 grados
-  DD();                            //Solo se activa por detección de línea
-  IA();
-  for (int X=0,X <= giro180,X=X+1){                                          //Mientras gira detecta para actuar acorde
-    sensor();
-    delay(1);
-    if(SI == Detector){
-      giroIzquierda();
-   }
-    else(SD== Detector){
-      giroDerecha();
-    }
-  }
-}
-  
+void giroDerecha(){DA();ID();delay(giroT);}               //Giro Derecha
 
+void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
-void adelante(){                       //Movimiento hacia adelante
-  DD();
-  ID();
-  while (True){                        //Siempre que vaya hacia adelante detecta para actuar acorde
-    sensor();
-    if(SI == Detector){
-      giroIzquierda();
-    }
-    else(SD== Detector){
-      giroDerecha();
-    }
-  }
-}       
+void giro180(){DD();IA();delay(giro180);}                 //Giro 180º
 
-void stop(){   //Las dos ruedas paran
-  IS();
-  DS();
-  
-}
-
-// FUNCIONES DEL LED 
-void blink(){                    //PARPADEO
-  digitalWrite(pinLed,HIGH);        //Enciende led
-  delay(blinkT);                    //Espera
-  digitalWrite(pinLed,LOW);         //Apaga led
-  delay(blinkT);                    //Espera
-}
-
-void blink_rave(){                //PARPADEO RAPIDO
-  digitalWrite(pinLed,HIGH);        //Enciende led
-  delay(raveT+errorT);              //Espera
-  digitalWrite(pinLed,LOW);         //Apaga led
-  delay(raveT);                     //Espera
-}
 //SENTIDO DE GIRO RUEDAS
   
 void DD(){                  //Rueda Derecha Delante
@@ -200,12 +116,26 @@ void IA(){                  //Rueda Izquierda Atras
   digitalWrite(pinMOIB,LOW);
   digitalWrite(pinMOIA,HIGH);
 }
-void DS(){                  //Rueda Derecha Stop
+void DS(){                  //Rueda Derecha paro
   digitalWrite(pinMODB,LOW);
   digitalWrite(pinMODA,LOW);
 }
-void IS(){                  //Rueda Izquierda Stop
+void IS(){                  //Rueda Izquierda paro
   digitalWrite(pinMOIB,LOW);
   digitalWrite(pinMOIA,LOW);
 }
 
+// FUNCIONES DEL LED 
+void blink(){                    //PARPADEO
+  digitalWrite(pinLed,HIGH);        //Enciende led
+  delay(blinkT);                    //Espera
+  digitalWrite(pinLed,LOW);         //Apaga led
+  delay(blinkT);                    //Espera
+}
+
+void blink_rave(){                //PARPADEO RAPIDO
+  digitalWrite(pinLed,HIGH);        //Enciende led
+  delay(raveT+errorT);              //Espera
+  digitalWrite(pinLed,LOW);         //Apaga led
+  delay(raveT);                     //Espera
+}
