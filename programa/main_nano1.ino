@@ -1,31 +1,19 @@
 //BIBLIOTECAS
 #include <Servo.h>
 
-//VARIABLES DE CALCULO Y AUXILIARES
-int val=0;
-int dump;
-
 //VARIABLES DE TIEMPO
 int errorT = 30;            //Temporizador de margen de error para botones
 int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
-int giroT=0;                 //Tiempo de giro en maniobras
-int giro180t;                 //Tiempo para girar 180º
-
-//BOTÓN
-int pinBut = 10;            //Pin
-int butState = 0;           //Estado del botón
+int giroT=0;                //Tiempo de giro en maniobras
+int giro180t;               //Tiempo para girar 180º
 
 //INDICADORES
 int pinLed = 13;
 
 //INTERRUPT     (COMUNICACIÓN CON EL SEGUNDO)
 int interruptPin=2;           //Pin de interrupción
-
-//PINS DE SENSORES
-int pinSD = 11;                // PIN Sensor Derecho
-int pinSI = 3;                 // PIN Sensor Izquierdo
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 8;                 // Motor Output Izquierdo A
