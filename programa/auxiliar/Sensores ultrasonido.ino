@@ -24,16 +24,16 @@ void loop(){
 //Creamos el loop de detección
 void sensores(){
   digitalWrite(TriggerD,LOW);
-  delay(2);
+  delayMicroseconds()(2);
   digitalWrite(TriggerD,HIGH);
-  delay(10);
+  delayMicroseconds()(10);
   digitalWrite(TriggerD,LOW);
   tD=pulseIn(EchoD,HIGH);  
  
   digitalWrite(TriggerI,LOW);
-  delay(2);
+  delayMicroseconds()(2);
   digitalWrite(TriggerI,HIGH);
-  delay(10);
+  delayMicroseconds()(10);
   digitalWrite(TriggerI,LOW);
   tI=pulseIn(EchoI,HIGH);
   //Estas dos lineas se pueden combinar
