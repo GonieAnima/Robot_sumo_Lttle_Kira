@@ -1,6 +1,7 @@
 //BIBLIOTECAS
 #include <Servo.h>
 
+
 //VARIABLES DE TIEMPO
 int errorT = 30;            //Temporizador de margen de error para botones
 int debounceT = 200;        //Temporizador de debouncing
