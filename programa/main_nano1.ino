@@ -50,7 +50,8 @@ void interruptInstance(){
 
 //COMBATE
 void combat(){
-  
+  while(1==1){
+  }
 }
 
 // COMBATE MICRO
@@ -65,7 +66,6 @@ void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 void giro180(){DD();IA();delay(giro180t);}                 //Giro 180º
 
 //SENTIDO DE GIRO RUEDAS
-  
 void DD(){                  //Rueda Derecha Delante
   digitalWrite(pinMODA,LOW);
   digitalWrite(pinMODB,HIGH);
