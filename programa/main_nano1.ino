@@ -8,7 +8,7 @@ int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                //Tiempo de giro en maniobras
-int giro180t;               //Tiempo para girar 180º
+int giro180t=1000;           //Tiempo para girar 180º
 
 //INDICADORES
 int pinLed = 13;
@@ -17,10 +17,10 @@ int pinLed = 13;
 int interruptPin=2;                  //Pin de interrupción
 
 //SETUP DE VARIABLES DE ACTUADORES
-int pinMOIA = 8;                 // Motor Output Izquierdo A
-int pinMOIB = 9;                 // Motor Output Izquierdo B
-int pinMODA = 10;                // Motor Output Derecha A
-int pinMODB = 12;                // Motor Output Derecha B
+int pinMOIA = 9;                 // Motor Output Izquierdo A
+int pinMOIB = 8;                 // Motor Output Izquierdo B
+int pinMODA = 12;                // Motor Output Derecha A
+int pinMODB = 10;                // Motor Output Derecha B
 
 //SETUP
 void setup(){
@@ -37,6 +37,7 @@ void setup(){
   pinMode(pinMODB, OUTPUT); 
 
   delay(3000);             //Delay normativo de inicio
+  combat();
 }
 
 void loop(){
@@ -47,12 +48,17 @@ void loop(){
 //INTERRUPCIONES DE COMUNICACIÓN    
 void interruptInstance(){
   giro180();
+  paro();
+  blink();
 }
 
 //COMBATE
 void combat(){
   while(1==1){
     adelante();
+    delay(1000);
+    paro();
+    delay(10000);
   }
 }
 
@@ -91,4 +97,12 @@ void DS(){                  //Rueda Derecha paro
 void IS(){                  //Rueda Izquierda paro
   digitalWrite(pinMOIB,LOW);
   digitalWrite(pinMOIA,LOW);
+}
+void blink(){
+  for(int x=0;x<200;x++){
+  digitalWrite(13,HIGH);
+  delay(250);
+  digitalWrite(13,LOW);
+  delay(250);
+  }
 }
