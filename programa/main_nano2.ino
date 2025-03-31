@@ -2,7 +2,6 @@
 #define SENSOR_LINEA 2
 #define TD 12 //Traspaso de datos al arduino principal
 
-
 void setup() {
   // Set up del sensor
 pinMode(SENSOR_LINEA,INPUT);

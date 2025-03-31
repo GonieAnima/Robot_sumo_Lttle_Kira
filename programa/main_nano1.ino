@@ -36,7 +36,7 @@ void setup(){
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
 
-  delay(3000)             //Delay normativo de inicio
+  delay(3000);             //Delay normativo de inicio
 }
 
 void loop(){
@@ -52,6 +52,7 @@ void interruptInstance(){
 //COMBATE
 void combat(){
   while(1==1){
+    adelante();
   }
 }
 
