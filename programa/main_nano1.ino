@@ -22,6 +22,9 @@ int pinMOIB = 8;                 // Motor Output Izquierdo B
 int pinMODA = 12;                // Motor Output Derecha A
 int pinMODB = 10;                // Motor Output Derecha B
 
+//SETUP DE VARIABLES DE SENSORES
+
+
 //SETUP
 void setup(){
   //INTERRUPCIONES (CODIGO PARA "COMUNICACIÓN" CON EL SEGUNDO ARDUINO)
@@ -35,6 +38,8 @@ void setup(){
   pinMode(pinMOIB, OUTPUT);  
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
+  pinMode(
+  
 
   delay(3000);             //Delay normativo de inicio
   combat();
