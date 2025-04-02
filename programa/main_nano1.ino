@@ -47,18 +47,16 @@ void loop(){
 
 //INTERRUPCIONES DE COMUNICACIÓN    
 void interruptInstance(){
-  giro180();
   paro();
-  blink();
+  delay(200);
+  giro180();
 }
 
 //COMBATE
 void combat(){
   while(1==1){
     adelante();
-    delay(1000);
-    paro();
-    delay(10000);
+    
   }
 }
 
