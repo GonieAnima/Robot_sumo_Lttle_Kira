@@ -1,5 +1,6 @@
 //BIBLIOTECAS
 #include <Servo.h>
+#include "VL53L0X.h"
 
 
 //VARIABLES DE TIEMPO
