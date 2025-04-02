@@ -8,7 +8,8 @@ int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                //Tiempo de giro en maniobras
-int giro180t=1000;           //Tiempo para girar 180º
+int giro180t=2000;           //Tiempo para girar 180º
+int parot=200;
 
 //INDICADORES
 int pinLed = 13;
@@ -36,6 +37,7 @@ void setup(){
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
 
+  paro();
   delay(3000);             //Delay normativo de inicio
   combat();
 }
@@ -47,29 +49,40 @@ void loop(){
 
 //INTERRUPCIONES DE COMUNICACIÓN    
 void interruptInstance(){
+  Serial.print("interrupt");
   paro();
-  delay(200);
   giro180();
+  Serial.print("Acabado");
 }
 
 //COMBATE
 void combat(){
   while(1==1){
+  
     adelante();
+    delay(10000);
     
+    
+   
   }
 }
 
 // COMBATE MICRO
 void adelante(){DD();ID();}                               //Adelante
 
-void paro(){IS();DS();}                                   //paro
+void paro(){IS();DS();
+delay(parot);}                                  //paro
 
 void giroDerecha(){DA();ID();delay(giroT);}               //Giro Derecha
 
 void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
-void giro180(){DD();IA();delay(giro180t);}                 //Giro 180º
+void giro180(){DD();IA();
+for(int y=0;y<1000;y++){
+  for(int b=0;b<100;b++){
+    for(int n=0;n<10;n++){}
+  }
+}}                 //Giro 180º
 
 //SENTIDO DE GIRO RUEDAS
 void DD(){                  //Rueda Derecha Delante
