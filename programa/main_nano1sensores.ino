@@ -11,11 +11,15 @@ int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                //Tiempo de giro en maniobras
 int giro180t=1000;           //Tiempo para girar 180º
 
+//VARIABLES DE SENSORES LASER
+bool sdi = 0;
+bool sdd = 0;
+bool sai = 0;
+bool sad = 0;
+
 //INDICADORES
 int pinLed = 13;
 
-//INTERRUPT                          (COMUNICACIÓN CON EL SEGUNDO)
-int interruptPin=2;                  //Pin de interrupción
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 9;                 // Motor Output Izquierdo A
@@ -44,21 +48,26 @@ void setup(){
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
 
+  //SETUP DE SENSORES
+  pinMode(pinSDI, INPUT);  
+  pinMode(pinSDD, INPUT); 
+  pinMode(pinSAI, INPUT); 
+  pinMode(pinSAD, INPUT);  
+  pinMode(pinSI, INPUT); 
+
+
   delay(3000);             //Delay normativo de inicio
   combat();
 }
 
 void loop(){
+  
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
 
-//INTERRUPCIONES DE COMUNICACIÓN    
-void interruptInstance(){
-  giro180();
-  paro();
-  blink();
-}
+
+
 
 //COMBATE
 void combat(){
