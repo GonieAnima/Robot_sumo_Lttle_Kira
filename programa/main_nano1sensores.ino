@@ -12,6 +12,7 @@ int giroT=0;                //Tiempo de giro en maniobras
 int giro180t=1000;           //Tiempo para girar 180º
 
 //VARIABLES DE SENSORES LASER
+int sl[4];
 bool sdi = 0;
 bool sdd = 0;
 bool sai = 0;
@@ -91,9 +92,15 @@ void combat(){
 
 //SENSORES LASER
 void sensores(){
+int sl[4];
 for (int i = 0; i < 4; i++) {
     bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
     Serial.print(detecta ? "1\t" : "0\t");  
+    int sl[i] = detecta ? "1\t" : "0\t";
+    if (i==0){sdi= sl[i];}
+    else if(i==1){sdd=sl[i];}
+    else if(i==2){sai=sl[i];}
+    else(i==3){sad=sl[i];}
   }
   Serial.println();
   delay(100);}
