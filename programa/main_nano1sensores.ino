@@ -41,8 +41,6 @@ const int UMBRAL = 1000;  // Distancia en mm para considerar detección
 
 //SETUP
 void setup(){
-  //INTERRUPCIONES (CODIGO PARA "COMUNICACIÓN" CON EL SEGUNDO ARDUINO)
-  attachInterrupt(digitalPinToInterrupt(interruptPin), interruptInstance, RISING);
 
   //SERIAL MONITOR
   Serial.begin(115200);                 //Comenzar una conexión serial con el USB
