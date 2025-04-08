@@ -79,6 +79,15 @@ void combat(){
   }
 }
 
+//SENSORES LASER
+void sensores(){
+for (int i = 0; i < 6; i++) {
+    bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
+    Serial.print(detecta ? "1\t" : "0\t");  
+  }
+  Serial.println();
+  delay(100);}
+
 // COMBATE MICRO
 void adelante(){DD();ID();}                               //Adelante
 
