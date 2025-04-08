@@ -13,10 +13,10 @@ int giro180t=1000;           //Tiempo para girar 180º
 
 //VARIABLES DE SENSORES LASER
 int sl[4];
-bool sdi = 0;
-bool sdd = 0;
-bool sai = 0;
-bool sad = 0;
+bool sdi = 0;            //sensor delantero izquierdo
+bool sdd = 0;            // //sensor delantero derecho
+bool sai = 0;             //sensor anterior izquierdo
+bool sad = 0;             //sensor anterior derecho
 
 //VARIABLE SENSOR LINEA
 int linea = 0;
@@ -75,7 +75,7 @@ void setup(){
     sensor[i].init();
     sensor[i].startContinuous();
   }
-
+  paro();
   delay(3000);             //Delay normativo de inicio
   combat();
 }
@@ -90,13 +90,19 @@ void loop(){
 
 
 //COMBATE
-void combat(){
+void combat(){               //Cada sensor tiene un linea de acción y luego vuelve al bucle
   while(1==1){
     adelante();
     sensores();
-    if
+    linea=digitalRead(SENSOR_LINEA);
+    if (linea==1){giro180();}
+    else if(sdd == 1){giroDerecha();}
+    else if(sdi==1){giroIzquierda();}
+    else if(sad==1){giro180();giroIzquierda();}
+    else (sai==){giro180();giroDerecha();}
   }
 }
+
 
 //SENSORES LASER    //Funcion para detectar los sensores láser y crear unas variables manejables
 void sensores(){
