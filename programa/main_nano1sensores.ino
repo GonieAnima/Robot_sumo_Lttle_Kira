@@ -18,6 +18,11 @@ bool sdd = 0;
 bool sai = 0;
 bool sad = 0;
 
+//VARIABLE SENSOR LINEA
+int linea = 0;
+//Definicion del PIN
+#define SENSOR_LINEA 2
+
 //INDICADORES
 int pinLed = 13;
 
@@ -28,7 +33,7 @@ int pinMOIB = 8;                 // Motor Output Izquierdo B
 int pinMODA = 12;                // Motor Output Derecha A
 int pinMODB = 10;                // Motor Output Derecha B
 
-//SETUP DE VARIABLES DE SENSORES
+//SETUP DE VARIABLES DE SENSORES LASER
 VL53L0X sensor[4];  
 const int xshut_pins[4] = {2, 3, 4, 5};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
 const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
@@ -53,7 +58,10 @@ void setup(){
   pinMode(pinSDD, INPUT); 
   pinMode(pinSAI, INPUT); 
   pinMode(pinSAD, INPUT);  
-  pinMode(pinSI, INPUT); 
+  pinMode(SENSOR_LINEA,INPUT); //int linea = digitalRead(SENSOR_LINEA);  copiar y pegar cada vez que queramos detectar
+  
+  
+ 
 
   //SENSORES LASER
   Serial.begin(115200);
