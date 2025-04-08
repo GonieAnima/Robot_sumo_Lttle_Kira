@@ -94,8 +94,9 @@ void loop(){
 //COMBATE
 void combat(){
   while(1==1){
+    adelante();
     sensores();
-    serial.print("sdd: ",sdd," sdi: ",sdi," sai: ",sai, " sad: ",sad);
+    if
   }
 }
 
@@ -109,8 +110,8 @@ for (int i = 0; i < 4; i++) {
     if (i==0){sdi= sl[i];}                            //No es lo más optimo pero, asigna una variable a los sensores con la que podemos trabajar
     else if(i==1){sdd=sl[i];}                          //o eso deberia hacer si no estoy Bobobó
     else if(i==2){sai=sl[i];}
-    else(i==3){sad=sl[i];}
-  }
+    else(i==3){sad=sl[i];} }
+  serial.print("sdd: ",sdd," sdi: ",sdi," sai: ",sai, " sad: ",sad);
   Serial.println();
   delay(100);}
 
