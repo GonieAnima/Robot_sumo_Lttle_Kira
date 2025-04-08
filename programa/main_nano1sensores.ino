@@ -28,8 +28,8 @@ int pinMODA = 12;                // Motor Output Derecha A
 int pinMODB = 10;                // Motor Output Derecha B
 
 //SETUP DE VARIABLES DE SENSORES
-VL53L0X sensor[6];  
-const int xshut_pins[6] = {2, 3, 4, 5, 6, 7};  
+VL53L0X sensor[4];  
+const int xshut_pins[4] = {2, 3, 4, 5};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
 const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
 
 
@@ -85,16 +85,13 @@ void loop(){
 //COMBATE
 void combat(){
   while(1==1){
-    adelante();
-    delay(1000);
-    paro();
-    delay(10000);
+    sensores();
   }
 }
 
 //SENSORES LASER
 void sensores(){
-for (int i = 0; i < 6; i++) {
+for (int i = 0; i < 4; i++) {
     bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
     Serial.print(detecta ? "1\t" : "0\t");  
   }
