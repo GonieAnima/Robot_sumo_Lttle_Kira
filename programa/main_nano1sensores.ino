@@ -28,10 +28,9 @@ int pinMODA = 12;                // Motor Output Derecha A
 int pinMODB = 10;                // Motor Output Derecha B
 
 //SETUP DE VARIABLES DE SENSORES
-int pinSDI = A1;                 //Motor INPUT Frontal Izquierdo
-int pinSDD = A2;                 //Motor INPUT Frontal Derecho
-int pinSAI = A3;                 //Motor INPUT Anterior Izquierdo
-int pinSAD = A4;                 //Motor INPUT Anterior Derecho
+VL53L0X sensor[6];  
+const int xshut_pins[6] = {2, 3, 4, 5, 6, 7};  
+const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
 
 
 //SETUP
@@ -55,6 +54,20 @@ void setup(){
   pinMode(pinSAD, INPUT);  
   pinMode(pinSI, INPUT); 
 
+  //SENSORES LASER
+  Serial.begin(115200);
+  Wire.begin();
+  
+  for (int i = 0; i < 4; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
+
+  for (int i = 0; i < 4; i++) {
+    delay(10);
+    digitalWrite(xshut_pins[i], HIGH);
+    delay(10);
+    sensor[i].setAddress(0x30 + i);
+    sensor[i].init();
+    sensor[i].startContinuous();
+  }
 
   delay(3000);             //Delay normativo de inicio
   combat();
