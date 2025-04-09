@@ -9,7 +9,7 @@ int raveT = 30;             //Temporizador de rave mientras se mantiene el boton
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                //Tiempo de giro en maniobras
 int giro180t=1000;           //Tiempo para girar 180º
-
+int am =90;           //potencia motores
 
 //VARIABLE SENSOR LINEA
 int linea = 0;
@@ -21,10 +21,10 @@ int pinLed = 13;
 
 
 //SETUP DE VARIABLES DE ACTUADORES
-int pinMOIA = 8;                 // Motor Output Izquierdo A
-int pinMOIB = 9;                 // Motor Output Izquierdo B
-int pinMODA = 12;                // Motor Output Derecha A
-int pinMODB = 10;                // Motor Output Derecha B
+int pinMOIA = 6;                 // Motor Output Izquierdo A
+int pinMOIB = 5;                 // Motor Output Izquierdo B
+int pinMODA = 10;                // Motor Output Derecha A
+int pinMODB = 11;                // Motor Output Derecha B
        
 //SETUP
 void setup(){
@@ -52,19 +52,17 @@ void setup(){
 }
 
 void loop(){
-  
-  adelante();
-  delay(50);
-  paro();
-  delay(50);
+giro180();
+delay(200);
+ while(1==1){ 
+ adelante();
   linea = digitalRead(SENSOR_LINEA);
-  if (linea==0){
+  if(linea==0){
     atras();
     delay(350);
-    paro();
-    delay(10050);
-  
-  }
+    giro180();
+    delay(400);
+    }}
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
@@ -81,32 +79,36 @@ void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
 void giro180(){DD();IA();}                 //Giro 180º
 
-void atras(){DA();IA();}
+void atras(){ 
+  analogWrite(pinMOIB,0);
+  analogWrite(pinMOIA,200);
+  analogWrite(pinMODB,0);
+  analogWrite(pinMODA,200);}
 
 //SENTIDO DE GIRO RUEDAS
 void DD(){                  //Rueda Derecha Delante
-  digitalWrite(pinMODA,LOW);
-  digitalWrite(pinMODB,HIGH);
+  analogWrite(pinMODA,0);
+  analogWrite(pinMODB,am);
 }
 void DA(){                  //Rueda Derecha Atras
-  digitalWrite(pinMODB,LOW);
-  digitalWrite(pinMODA,HIGH);
+  analogWrite(pinMODB,0);
+  analogWrite(pinMODA,am);
 }
 void ID(){                  //Rueda Izquierda Delante
-  digitalWrite(pinMOIA,LOW);
-  digitalWrite(pinMOIB,HIGH);
+  analogWrite(pinMOIA,0);
+  analogWrite(pinMOIB,am);
 }
 void IA(){                  //Rueda Izquierda Atras
-  digitalWrite(pinMOIB,LOW);
-  digitalWrite(pinMOIA,HIGH);
+  analogWrite(pinMOIB,0);
+  analogWrite(pinMOIA,am);
 }
 void DS(){                  //Rueda Derecha paro
-  digitalWrite(pinMODB,LOW);
-  digitalWrite(pinMODA,LOW);
+  analogWrite(pinMODB,0);
+  analogWrite(pinMODA,0);
 }
 void IS(){                  //Rueda Izquierda paro
-  digitalWrite(pinMOIB,LOW);
-  digitalWrite(pinMOIA,LOW);
+  analogWrite(pinMOIB,0);
+  analogWrite(pinMOIA,0);
 }
 void blink(){
   for(int x=0;x<200;x++){
