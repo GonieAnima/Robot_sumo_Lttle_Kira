@@ -8,25 +8,26 @@ int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=0;                //Tiempo de giro en maniobras
-int giro180t=2000;           //Tiempo para girar 180º
-int parot=200;
+int giro180t=1000;           //Tiempo para girar 180º
+
+
+//VARIABLE SENSOR LINEA
+int linea = 0;
+//Definicion del PIN
+#define SENSOR_LINEA 2
 
 //INDICADORES
 int pinLed = 13;
 
-//INTERRUPT                          (COMUNICACIÓN CON EL SEGUNDO)
-int interruptPin=2;                  //Pin de interrupción
 
 //SETUP DE VARIABLES DE ACTUADORES
-int pinMOIA = 9;                 // Motor Output Izquierdo A
-int pinMOIB = 8;                 // Motor Output Izquierdo B
+int pinMOIA = 8;                 // Motor Output Izquierdo A
+int pinMOIB = 9;                 // Motor Output Izquierdo B
 int pinMODA = 12;                // Motor Output Derecha A
 int pinMODB = 10;                // Motor Output Derecha B
-
+       
 //SETUP
 void setup(){
-  //INTERRUPCIONES (CODIGO PARA "COMUNICACIÓN" CON EL SEGUNDO ARDUINO)
-  attachInterrupt(digitalPinToInterrupt(interruptPin), interruptInstance, RISING);
 
   //SERIAL MONITOR
   Serial.begin(115200);                 //Comenzar una conexión serial con el USB
@@ -37,52 +38,50 @@ void setup(){
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
 
+  //SETUP DE SENSORES
+  pinMode(SENSOR_LINEA,INPUT); //int linea = digitalRead(SENSOR_LINEA);  copiar y pegar cada vez que queramos detectar
+  
+  
+ 
+
+  //SENSORES LASER
+  Serial.begin(115200);
+  
   paro();
   delay(3000);             //Delay normativo de inicio
-  combat();
 }
 
 void loop(){
+  
+  adelante();
+  delay(50);
+  paro();
+  delay(50);
+  linea = digitalRead(SENSOR_LINEA);
+  if (linea==0){
+    atras();
+    delay(350);
+    paro();
+    delay(10050);
+  
+  }
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
 
-//INTERRUPCIONES DE COMUNICACIÓN    
-void interruptInstance(){
-  Serial.print("interrupt");
-  paro();
-  giro180();
-  Serial.print("Acabado");
-}
-
-//COMBATE
-void combat(){
-  while(1==1){
-  
-    adelante();
-    delay(10000);
-    
-    
-   
-  }
-}
 
 // COMBATE MICRO
 void adelante(){DD();ID();}                               //Adelante
 
-void paro(){IS();DS();
-delay(parot);}                                  //paro
+void paro(){IS();DS();}                                   //paro
 
 void giroDerecha(){DA();ID();delay(giroT);}               //Giro Derecha
 
 void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
-void giro180(){DD();IA();
-for(int y=0;y<1000;y++){
-  for(int b=0;b<100;b++){
-    for(int n=0;n<10;n++){}
-  }
-}}                 //Giro 180º
+void giro180(){DD();IA();}                 //Giro 180º
+
+void atras(){DA();IA();}
 
 //SENTIDO DE GIRO RUEDAS
 void DD(){                  //Rueda Derecha Delante
