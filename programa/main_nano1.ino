@@ -1,6 +1,6 @@
 //BIBLIOTECAS
 #include <Servo.h>
-
+#include "VL53L0X.h"
 
 //VARIABLES DE TIEMPO
 int errorT = 30;            //Temporizador de margen de error para botones
@@ -19,13 +19,27 @@ int linea = 0;
 //INDICADORES
 int pinLed = 13;
 
+//VARIABLES DE SENSORES LASER
+int sl[4];
+bool sdi = 0;            //sensor delantero izquierdo
+bool sdd = 0;            // //sensor delantero derecho
+bool sai = 0;             //sensor anterior izquierdo
+bool sad = 0;             //sensor anterior derecho
+
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 6;                 // Motor Output Izquierdo A
 int pinMOIB = 5;                 // Motor Output Izquierdo B
 int pinMODA = 10;                // Motor Output Derecha A
 int pinMODB = 11;                // Motor Output Derecha B
-       
+
+
+//SETUP DE VARIABLES DE SENSORES LASER
+VL53L0X sensor[4];  
+const int xshut_pins[4] = {2, 3, 4, 5};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
+const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
+
+
 //SETUP
 void setup(){
 
@@ -41,12 +55,26 @@ void setup(){
   //SETUP DE SENSORES
   pinMode(SENSOR_LINEA,INPUT); //int linea = digitalRead(SENSOR_LINEA);  copiar y pegar cada vez que queramos detectar
   
-  
+   //SETUP DE SENSORES laser
+  pinMode(pinSDI, INPUT);  
+  pinMode(pinSDD, INPUT); 
+  pinMode(pinSAI, INPUT); 
+  pinMode(pinSAD, INPUT);  
  
-
-  //SENSORES LASER
-  Serial.begin(115200);
+//SENSORES LASER
+  Wire.begin();
   
+  for (int i = 0; i < 4; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
+
+  for (int i = 0; i < 4; i++) {
+    delay(10);
+    digitalWrite(xshut_pins[i], HIGH);
+    delay(10);
+    sensor[i].setAddress(0x30 + i);
+    sensor[i].init();
+    sensor[i].startContinuous();
+  }
+       
   paro();
   delay(3000);             //Delay normativo de inicio
 }
@@ -62,7 +90,14 @@ delay(200);
     delay(350);
     giro180();
     delay(400);
-    }}
+    }
+    else if(sdd == 1){giroDerecha();}
+    else if(sdi==1){giroIzquierda();}
+    else if(sad==1){giro180();giroIzquierda();}
+    else (sai==1){giro180();giroDerecha();}
+  
+ }
+}
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
