@@ -1,6 +1,6 @@
 //BIBLIOTECAS
-#include <Servo.h>
 #include "VL53L0X.h"
+#include <Wire.h>
 
 //VARIABLES DE TIEMPO
 int errorT = 30;            //Temporizador de margen de error para botones
@@ -20,11 +20,10 @@ int linea = 0;
 int pinLed = 13;
 
 //VARIABLES DE SENSORES LASER
-int sl[4];
+int sl[3];
+bool sdf = 0;            //sensor delantero frente
+bool sdd = 0;            //sensor delantero derecho
 bool sdi = 0;            //sensor delantero izquierdo
-bool sdd = 0;            // //sensor delantero derecho
-bool sai = 0;             //sensor anterior izquierdo
-bool sad = 0;             //sensor anterior derecho
 
 
 //SETUP DE VARIABLES DE ACTUADORES
@@ -35,8 +34,8 @@ int pinMODB = 11;                // Motor Output Derecha B
 
 
 //SETUP DE VARIABLES DE SENSORES LASER
-VL53L0X sensor[4];  
-const int xshut_pins[4] = {2, 3, 4, 5};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
+VL53L0X sensor[3];  
+const int xshut_pins[3] = {2, 3, 4};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
 const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
 
 
