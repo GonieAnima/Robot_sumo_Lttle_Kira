@@ -1,3 +1,6 @@
+//MUCHAS GRACIAS SANTI POR PROVEER EL PROGRAMA
+//                                      -Gonie
+
 //- Sensores Laser -
 
 //Librería: VL53L0X by Pololu
@@ -7,17 +10,17 @@
 #include <Wire.h>
 #include "VL53L0X.h"
 
-VL53L0X sensor[6];  
-const int xshut_pins[6] = {2, 3, 4, 5, 6, 7};  
-const int UMBRAL = 1000;  // Distancia en mm para considerar detección
+VL53L0X sensor[3];  
+const int xshut_pins[3] = {7, 8, 12};  
+const int UMBRAL = 150;  // Distancia en mm para considerar detección
 
 void setup() {
   Serial.begin(115200);
   Wire.begin();
   
-  for (int i = 0; i < 6; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
+  for (int i = 0; i < 3; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
 
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 3; i++) {
     delay(10);
     digitalWrite(xshut_pins[i], HIGH);
     delay(10);
@@ -28,7 +31,7 @@ void setup() {
 }
 
 void loop() {
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 3; i++) {
     bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
     Serial.print(detecta ? "1\t" : "0\t");  
   }
