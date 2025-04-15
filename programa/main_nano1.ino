@@ -24,7 +24,7 @@ int sl[3];
 bool sdf = 0;            //sensor delantero frente
 bool sdd = 0;            //sensor delantero derecho
 bool sdi = 0;            //sensor delantero izquierdo
-
+//7Frente 8Derecho 12Izquierdo
 
 //SETUP DE VARIABLES DE ACTUADORES
 int pinMOIA = 6;                 // Motor Output Izquierdo A
@@ -35,7 +35,7 @@ int pinMODB = 11;                // Motor Output Derecha B
 
 //SETUP DE VARIABLES DE SENSORES LASER
 VL53L0X sensor[3];  
-const int xshut_pins[3] = {2, 3, 4};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
+const int xshut_pins[3] = {7, 8, 12};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
 const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
 
 
