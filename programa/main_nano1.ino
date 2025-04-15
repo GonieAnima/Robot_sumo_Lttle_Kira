@@ -20,7 +20,9 @@ int linea = 0;
 int pinLed = 13;
 
 //VARIABLES DE SENSORES LASER
+
 int sl[3];
+
 bool sdf = 0;            //sensor delantero frente
 bool sdd = 0;            //sensor delantero derecho
 bool sdi = 0;            //sensor delantero izquierdo
@@ -70,9 +72,29 @@ void setup(){
        
   paro();
   delay(3000);             //Delay normativo de inicio
+
+  combate();
 }
 
 void combate(){
+  while(1==1){
+    
+    sensores();   //das valor a variables de sensores 
+
+    if (sdf==1){
+      adelante_rapido();
+      Serial.println("DELANTE");
+    }
+
+    else if (sdd==1){
+      Serial.println("DERECHA");
+    }
+    
+    else if (sdi==1){
+      Serial.println("IZQUIERDA");
+    }
+  }
+}
   
 
 
@@ -92,6 +114,7 @@ void loop(){
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
+
 //SENSORES
 void sensores(){
 
@@ -119,7 +142,14 @@ void giroDerecha(){DA();ID();delay(giroT);}               //Giro Derecha
 
 void giroIzquierda(){DD();IA();delay(giroT);}             //Giro Izquierda
 
-void giro180(){DD();IA();}                 //Giro 180º
+void giro180(){DD();IA();}                                //Giro 180º
+
+void adelante_rapido(){
+  analogWrite(pinMODA,0);
+  analogWrite(pinMODB,255);
+  analogWrite(pinMOIA,0);
+  analogWrite(pinMOIB,255);
+}
 
 void atras(){ 
   analogWrite(pinMOIB,0);
@@ -154,7 +184,7 @@ void IS(){                  //Rueda Izquierda paro
   analogWrite(pinMOIA,0);
 }
 void blink(){
-  for(int x=0;x<200;x++){
+  for(int x=0;x<5;x++){
   digitalWrite(13,HIGH);
   delay(250);
   digitalWrite(13,LOW);
