@@ -36,7 +36,7 @@ int pinMODB = 11;                // Motor Output Derecha B
 //SETUP DE VARIABLES DE SENSORES LASER
 VL53L0X sensor[3];  
 const int xshut_pins[3] = {7, 8, 12};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
-const int UMBRAL = 1000;  // Distancia en mm para considerar detección           
+const int UMBRAL = 150;  // Distancia en mm para considerar detección           
 
 
 //SETUP
@@ -51,21 +51,15 @@ void setup(){
   pinMode(pinMODA, OUTPUT); 
   pinMode(pinMODB, OUTPUT); 
 
-  //SETUP DE SENSORES
+  //SETUP DE SENSOR LINEA
   pinMode(SENSOR_LINEA,INPUT); //int linea = digitalRead(SENSOR_LINEA);  copiar y pegar cada vez que queramos detectar
-  
-   //SETUP DE SENSORES laser
-  pinMode(pinSDI, INPUT);  
-  pinMode(pinSDD, INPUT); 
-  pinMode(pinSAI, INPUT); 
-  pinMode(pinSAD, INPUT);  
  
 //SENSORES LASER
   Wire.begin();
   
-  for (int i = 0; i < 4; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
+  for (int i = 0; i < 3; i++) pinMode(xshut_pins[i], OUTPUT), digitalWrite(xshut_pins[i], LOW);
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 3; i++) {
     delay(10);
     digitalWrite(xshut_pins[i], HIGH);
     delay(10);
@@ -78,29 +72,43 @@ void setup(){
   delay(3000);             //Delay normativo de inicio
 }
 
+void combate(){
+  
+
+
+
+
 void loop(){
-giro180();
-delay(200);
  while(1==1){ 
- adelante();
-  linea = digitalRead(SENSOR_LINEA);
+  adelante();
+  sensores();
   if(linea==0){
     atras();
     delay(350);
     giro180();
     delay(400);
     }
-    else if(sdd == 1){giroDerecha();}
-    else if(sdi==1){giroIzquierda();}
-    else if(sad==1){giro180();giroIzquierda();}
-    else (sai==1){giro180();giroDerecha();}
-  
- }
-}
+  }
 }
 
 //################################################### POR ABAJO TODO ESTO SON FUNCIONES #######################################################
+//SENSORES
+void sensores(){
 
+  linea = digitalRead(SENSOR_LINEA);
+  for (int i = 0; i < 3; i++) {
+    bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
+    Serial.print(detecta ? "1\t" : "0\t");  
+    sl[i]=detecta;
+  }
+
+  sdf = sl[0];
+  sdd = sl[1];
+  sdi = sl[2];
+
+  Serial.println();
+  delay(10);
+}
 
 // COMBATE MICRO
 void adelante(){DD();ID();}                               //Adelante
@@ -117,7 +125,8 @@ void atras(){
   analogWrite(pinMOIB,0);
   analogWrite(pinMOIA,200);
   analogWrite(pinMODB,0);
-  analogWrite(pinMODA,200);}
+  analogWrite(pinMODA,200);
+}
 
 //SENTIDO DE GIRO RUEDAS
 void DD(){                  //Rueda Derecha Delante
