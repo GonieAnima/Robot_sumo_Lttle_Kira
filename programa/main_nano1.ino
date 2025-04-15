@@ -7,7 +7,7 @@ int errorT = 30;            //Temporizador de margen de error para botones
 int debounceT = 200;        //Temporizador de debouncing
 int raveT = 30;             //Temporizador de rave mientras se mantiene el boton pulsado RAVE RAVE Tsk Tsk Tsk ...
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
-int giroT=0;                //Tiempo de giro en maniobras
+int giroT=150;                //Tiempo de giro en maniobras
 int giro180t=1000;           //Tiempo para girar 180º
 int am =90;           //potencia motores
 
@@ -78,27 +78,34 @@ void setup(){
 
 void combate(){
   while(1==1){
-    
+    adelante();
+    //paro();
     sensores();   //das valor a variables de sensores 
-
-    if (sdf==1){
-      adelante_rapido();
+    if (linea==0){
+      atras();
+      delay(350);
+      giro180();
+      delay(400);
+    }
+    else if (sdf==1){
+      while(sdf==1){
+        adelante_rapido();
+        sensores();
+      }
       Serial.println("DELANTE");
     }
 
     else if (sdd==1){
+      giroDerecha();
       Serial.println("DERECHA");
     }
     
     else if (sdi==1){
+      giroIzquierda();
       Serial.println("IZQUIERDA");
     }
   }
 }
-  
-
-
-
 
 void loop(){
  while(1==1){ 
