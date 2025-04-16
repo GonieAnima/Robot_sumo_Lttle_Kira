@@ -9,7 +9,7 @@ int raveT = 30;             //Temporizador de rave mientras se mantiene el boton
 int startT=3000;            //Tiempo de inicio como dictaminado en las reglas
 int giroT=150;                //Tiempo de giro en maniobras
 int giro180t=1000;           //Tiempo para girar 180º
-int am =90;           //potencia motores
+int am =100;                //potencia motores
 
 //VARIABLE SENSOR LINEA
 int linea = 0;
@@ -38,7 +38,7 @@ int pinMODB = 11;                // Motor Output Derecha B
 //SETUP DE VARIABLES DE SENSORES LASER
 VL53L0X sensor[3];  
 const int xshut_pins[3] = {7, 8, 12};  //Pines de sensore laser ,Vicente:HAZ PRUEBAS CON ESTO PORFIS 
-const int UMBRAL = 150;  // Distancia en mm para considerar detección           
+const int UMBRAL = 300;  // Distancia en mm para considerar detección           
 
 
 //SETUP
@@ -128,7 +128,6 @@ void sensores(){
   linea = digitalRead(SENSOR_LINEA);
   for (int i = 0; i < 3; i++) {
     bool detecta = sensor[i].readRangeContinuousMillimeters() < UMBRAL;
-    Serial.print(detecta ? "1\t" : "0\t");  
     sl[i]=detecta;
   }
 
