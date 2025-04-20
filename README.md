@@ -1,2 +1,2 @@
-# robot1
-Vicente y Gonzalo best duo
+# Robot de sumo
+Repositorio para el proyecto robot de sumo lttle kira
